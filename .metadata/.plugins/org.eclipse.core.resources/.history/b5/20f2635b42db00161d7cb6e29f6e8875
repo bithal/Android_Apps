@@ -1,0 +1,95 @@
+package com.example.savetoserver;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity implements OnClickListener {
+
+	TextView name,email,number;
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        name=(TextView) findViewById(R.id.name);
+		email=(TextView) findViewById(R.id.email);
+		number=(TextView) findViewById(R.id.number);
+		
+		Button btnButton = (Button) findViewById(R.id.button1);
+		btnButton.setOnClickListener(this);
+    }
+
+   
+	
+	
+	
+	class Send extends AsyncTask<String, Void,Long > {
+
+	   
+
+	    protected Long doInBackground(String... strings) {	
+	
+	
+	
+	Toast.makeText(getApplicationContext(), strings[0]+"\n"+strings[1]+"\n"+strings[2], Toast.LENGTH_LONG).show();
+	HttpClient httpclient = new DefaultHttpClient();
+	HttpPost httppost = new HttpPost("http://192.168.1.4:9090/AndroidServer/AndroidTest");
+
+	try {
+	    // Add your data
+	    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+	    nameValuePairs.add(new BasicNameValuePair("Name", strings[0]));
+	    nameValuePairs.add(new BasicNameValuePair("Email", strings[1]));
+	    nameValuePairs.add(new BasicNameValuePair("Number", strings[2]));
+	    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+	    
+	    
+	    // Execute HTTP Post Request
+	    HttpResponse response = httpclient.execute(httppost);
+
+
+	} catch (Exception e) {
+	    // TODO Auto-generated catch block
+	}
+	return null;
+	   
+}
+	    protected void onProgressUpdate(Integer... progress) {
+	       
+	     }
+
+	     protected void onPostExecute(Long result) {
+	         
+	     }
+	 }
+
+
+
+	@Override
+	public void onClick(View arg0) {
+		String Name=name.getText().toString();
+		String Email=email.getText().toString();
+		String Number=number.getText().toString();
+		new Send().execute(Name,Email,Number);
+	}
+}

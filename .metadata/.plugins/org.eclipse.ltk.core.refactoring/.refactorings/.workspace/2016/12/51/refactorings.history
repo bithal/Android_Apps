@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;NewRestApi&apos;" deleteContents="true" description="Delete resource &apos;NewRestApi&apos;" element1="/NewRestApi" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1481794727572"/>&#x0A;<refactoring comment="Delete resource &apos;InternalStorage_File&apos;" deleteContents="true" description="Delete resource &apos;InternalStorage_File&apos;" element1="/InternalStorage_File" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1481889983578"/>
+</session>
